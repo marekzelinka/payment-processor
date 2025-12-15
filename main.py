@@ -1,13 +1,34 @@
+import os
+
+from dotenv import load_dotenv
+
+from pay.credit_card import CreditCard
 from pay.order import LineItem, Order
 from pay.payment import pay_order
+from pay.payment_processor import PaymentProcessor
 
 
-def main():
-    # Test card number: 1249190007575069
+# Test card number: 1249190007575069
+def input_card_info() -> CreditCard:
+    card = input("Please enter your card number: ")
+    month = int(input("Please enter the card expiry month: "))
+    year = int(input("Please enter the card expiry year: "))
+
+    return CreditCard(number=card, expiry_month=month, expiry_year=year)
+
+
+def main() -> None:
+    load_dotenv()
+    API_KEY = os.getenv("api_key") or ""
+    payment_processor = PaymentProcessor(API_KEY)
+
     order = Order()
     order.line_items.append(LineItem(name="Shoes", price=100_00, quantity=2))
     order.line_items.append(LineItem(name="Hat", price=50_00))
-    pay_order(order)
+
+    # read card info from user
+    credit_card = input_card_info()
+    pay_order(order, payment_processor, credit_card)
 
 
 if __name__ == "__main__":

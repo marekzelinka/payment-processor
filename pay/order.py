@@ -1,18 +1,15 @@
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum, auto
 
 
-# TODO: StrEnum
-class OrderStatus(Enum):
-    OPEN = "open"
-    PAID = "paid"
+class OrderStatus(StrEnum):
+    OPEN = auto()
+    PAID = auto()
 
 
-# TODO: make fronzen, kw only
-@dataclass
+@dataclass(kw_only=True)
 class LineItem:
     name: str
-    # TODO: price could be float
     price: int
     quantity: int = 1
 
@@ -21,15 +18,13 @@ class LineItem:
         return self.price * self.quantity
 
 
-# TODO: make fronzen, kw only
-@dataclass
+@dataclass(kw_only=True)
 class Order:
     line_items: list[LineItem] = field(default_factory=list)
     status: OrderStatus = OrderStatus.OPEN
 
     @property
     def total(self) -> int:
-        # TODO: use sum(map(...
         return sum(item.total for item in self.line_items)
 
     def pay(self) -> None:
