@@ -1,5 +1,6 @@
 import os
 
+import pyinputplus as pyip
 from dotenv import load_dotenv
 
 from pay.credit_card import CreditCard
@@ -10,9 +11,9 @@ from pay.payment_processor import PaymentProcessor
 
 # Test card number: 1249190007575069
 def input_card_info() -> CreditCard:
-    card = input("Please enter your card number: ")
-    month = int(input("Please enter the card expiry month: "))
-    year = int(input("Please enter the card expiry year: "))
+    card = pyip.inputStr("Please enter your card number: ", strip=True, limit=16)
+    month = pyip.inputInt("Please enter the card expiry month: ", min=1, max=12)
+    year = pyip.inputInt("Please enter the card expiry year: ", greaterThan=0)
 
     return CreditCard(number=card, expiry_month=month, expiry_year=year)
 
