@@ -5,6 +5,7 @@ from enum import StrEnum, auto
 class OrderStatus(StrEnum):
     OPEN = auto()
     PAID = auto()
+    RETURNED = auto()
 
 
 @dataclass(kw_only=True)
@@ -32,3 +33,6 @@ class Order:
 
     def pay(self) -> None:
         self.status = OrderStatus.PAID
+
+    def returned(self) -> None:
+        self.status = OrderStatus.RETURNED

@@ -15,6 +15,16 @@ class PaymentProcessor:
 
         print(f"Charging card number {credit_card.number} for ${amount / 100:.2f}")
 
+    def chargeback(self, credit_card: CreditCard, *, amount: int) -> None:
+        if not PaymentProcessor.validate_credit_card(credit_card):
+            raise ValueError("Invalid credit card")
+        if not self.__check_api_key():
+            raise ValueError(f"Invalid API key: {repr(self.__api_key)}")
+
+        print(
+            f"Returning funds to card card with number {credit_card.number} for ${amount / 100:.2f}"
+        )
+
     @classmethod
     def validate_credit_card(cls, credit_card: CreditCard) -> bool:
         return (

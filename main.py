@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 from pay.credit_card import CreditCard
 from pay.order import LineItem, Order
-from pay.payment import pay_order
+from pay.payment import pay_order, return_order
 from pay.payment_processor import PaymentProcessor
 
 
@@ -30,6 +30,8 @@ def main() -> None:
     # read card info from user
     credit_card = input_card_info()
     pay_order(order, payment_processor, credit_card)
+
+    return_order(order, payment_processor, credit_card)
 
 
 if __name__ == "__main__":
