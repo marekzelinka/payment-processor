@@ -24,8 +24,8 @@ def main() -> None:
     payment_processor = PaymentProcessor(API_KEY)
 
     order = Order()
-    order.line_items.append(LineItem(name="Shoes", price=100_00, quantity=2))
-    order.line_items.append(LineItem(name="Hat", price=50_00))
+    order.add_to_delivery(LineItem(name="Shoes", price=100_00, quantity=2))
+    order.add_to_delivery(LineItem(name="Hat", price=50_00))
 
     # read card info from user
     credit_card = input_card_info()

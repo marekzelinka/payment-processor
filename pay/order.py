@@ -27,5 +27,8 @@ class Order:
     def total(self) -> int:
         return sum(item.total for item in self.line_items)
 
+    def add_to_delivery(self, item: LineItem) -> None:
+        self.line_items.append(item)
+
     def pay(self) -> None:
         self.status = OrderStatus.PAID
