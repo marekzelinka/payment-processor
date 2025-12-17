@@ -20,7 +20,7 @@ def input_card_info() -> CreditCard:
 
 def main() -> None:
     load_dotenv()
-    API_KEY = os.getenv("api_key") or ""
+    API_KEY = os.getenv("API_KEY") or ""
     payment_processor = PaymentProcessor(API_KEY)
 
     order = Order()
