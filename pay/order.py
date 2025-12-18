@@ -1,8 +1,8 @@
 from dataclasses import dataclass, field
-from enum import StrEnum, auto
+from enum import Enum, auto
 
 
-class OrderStatus(StrEnum):
+class OrderStatus(Enum):
     OPEN = auto()
     PAID = auto()
     RETURNED = auto()

@@ -15,11 +15,11 @@ def credit_card() -> CreditCard:
 
 class PaymentProcessorMock:
     def charge(self, credit_card: CreditCard, *, amount: int) -> None:
-        print(f"Charge card with number {credit_card.number} for ${amount / 100:.2f}")
+        print(f"Charging card number {credit_card.number} for ${amount / 100:.2f}")
 
     def chargeback(self, credit_card: CreditCard, *, amount: int) -> None:
         print(
-            f"Chargeback card with number {credit_card.number} for ${amount / 100:.2f}"
+            f"Returning funds to card card with number {credit_card.number} for ${amount / 100:.2f}"
         )
 
 
@@ -40,5 +40,6 @@ def test_chargeback_order(credit_card: CreditCard) -> None:
     order = Order()
     order.line_items.append(LineItem(name="Shoes", price=100_00, quantity=2))
     pay_order(order, PaymentProcessorMock(), credit_card)
+    assert order.status == OrderStatus.PAID
     return_order(order, PaymentProcessorMock(), credit_card)
     assert order.status == OrderStatus.RETURNED
