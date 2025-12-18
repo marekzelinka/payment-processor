@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 
-@dataclass(frozen=True, kw_only=True)
+@dataclass
 class CreditCard:
     number: str
     expiry_month: int

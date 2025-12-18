@@ -8,7 +8,7 @@ class OrderStatus(StrEnum):
     RETURNED = auto()
 
 
-@dataclass(kw_only=True)
+@dataclass
 class LineItem:
     name: str
     price: int
@@ -19,7 +19,7 @@ class LineItem:
         return self.price * self.quantity
 
 
-@dataclass(kw_only=True)
+@dataclass
 class Order:
     line_items: list[LineItem] = field(default_factory=list)
     status: OrderStatus = OrderStatus.OPEN
