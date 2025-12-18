@@ -8,7 +8,7 @@ from pay.credit_card import CreditCard
 from pay.payment_processor import PaymentProcessor, luhn_checksum
 
 load_dotenv()
-API_KEY = os.getenv("api_key") or ""
+API_KEY = os.getenv("API_KEY") or ""
 
 CC_YEAR = date.today().year + 2
 
